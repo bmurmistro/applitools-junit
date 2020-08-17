@@ -23,9 +23,7 @@ public class EyesWatcher
   public static Eyes eyes = new Eyes();
 
   private String testName;
-
-  private static BatchInfo batch;
-
+  
   private static final String APPLITOOLS_KEY = System.getProperty("APPLITOOLS_API_KEY", System.getenv("APPLITOOLS_API_KEY"));
 
   private static final String APPLICATION_NAME = System.getProperty("applicationName", "Branch Test");
@@ -33,15 +31,14 @@ public class EyesWatcher
   private static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
   static {
-    String localBranchName = System.getProperty("branchName", System.getenv("GIT_BRANCH_NAME"));
+/*    String localBranchName = System.getProperty("branchName", System.getenv("GIT_BRANCH_NAME"));
     if (localBranchName == null) {
       localBranchName = "default";
-    }
+    }*/
     eyes.setIsDisabled(APPLITOOLS_KEY == null);
 
     if (!eyes.getIsDisabled()) {
-      String buildNumber = System.getenv("BUILD_NUMBER");
-      BatchInfo batchInfo = new BatchInfo((buildNumber != null ? "#" + buildNumber : " " + localBranchName));
+      BatchInfo batchInfo = new BatchInfo(null);
 
       String batchId = System.getenv("APPLITOOLS_BATCH_ID");
       if (batchId != null) {
